@@ -5,7 +5,7 @@ const Home = () => {
       {/* Sección principal */}
       <section className="hero">
         <h1>Bienvenido a <span className="resaltado">Creciendo Juntos</span></h1>
-        <p>Cursos para niños, jóvenes, adultos y viejos.<br />Aprende a tu ritmo desde donde estés.</p>
+        <p>Cursos para niños, jóvenes, adultos y viejos.<br />Aprende a tu ritmo donde quiera que estés.</p>
         <a href="#cursos" className="btn-hero">Ver cursos</a>
       </section>
 
