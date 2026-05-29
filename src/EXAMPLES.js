@@ -6,28 +6,28 @@
 export const authStorageExample = {
   // Guardar token después del login
   saveAuthToken: (token, user) => {
-    localStorage.setItem('authToken', token);
-    localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('loginTime', new Date().toISOString());
+    localStorage.setItem("authToken", token);
+    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("loginTime", new Date().toISOString());
   },
 
   // Recuperar token
   getAuthToken: () => {
-    return localStorage.getItem('authToken');
+    return localStorage.getItem("authToken");
   },
 
   // Verificar si hay sesión activa
   hasActiveSession: () => {
-    const token = localStorage.getItem('authToken');
-    const user = localStorage.getItem('user');
+    const token = localStorage.getItem("authToken");
+    const user = localStorage.getItem("user");
     return !!(token && user);
   },
 
   // Limpiar sesión
   clearSession: () => {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('user');
-    localStorage.removeItem('loginTime');
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("user");
+    localStorage.removeItem("loginTime");
   },
 };
 
@@ -37,26 +37,26 @@ export const authStorageExample = {
 export const preferencesStorageExample = {
   // Guardar preferencias
   savePreferences: (preferences) => {
-    const current = localStorage.getItem('userPreferences');
+    const current = localStorage.getItem("userPreferences");
     const updated = {
-      ...JSON.parse(current || '{}'),
+      ...JSON.parse(current || "{}"),
       ...preferences,
     };
-    localStorage.setItem('userPreferences', JSON.stringify(updated));
+    localStorage.setItem("userPreferences", JSON.stringify(updated));
   },
 
   // Obtener preferencias
   getPreferences: () => {
-    const prefs = localStorage.getItem('userPreferences');
+    const prefs = localStorage.getItem("userPreferences");
     return prefs ? JSON.parse(prefs) : {};
   },
 
   // Ejemplo de preferencias
   examplePrefs: {
-    theme: 'light',      // 'light' | 'dark'
-    language: 'es',      // 'es' | 'en' | 'pt'
+    theme: "light", // 'light' | 'dark'
+    language: "es", // 'es' | 'en' | 'pt'
     notifications: true,
-    fontSize: 'normal',  // 'small' | 'normal' | 'large'
+    fontSize: "normal", // 'small' | 'normal' | 'large'
   },
 };
 
@@ -90,19 +90,19 @@ const MyComponent = () => {
  * EJEMPLO 4: Estructura de datos en localStorage
  */
 export const localStorageStructure = {
-  authToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...',
+  authToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
   user: JSON.stringify({
-    id: '123',
-    name: 'Juan Pérez',
-    email: 'juan@example.com',
+    id: "123",
+    name: "Juan Pérez",
+    email: "juan@example.com",
     age: 25,
   }),
   userPreferences: JSON.stringify({
-    theme: 'light',
-    language: 'es',
+    theme: "light",
+    language: "es",
     notifications: true,
   }),
-  loginTime: '2026-04-20T10:30:00.000Z',
+  loginTime: "2026-04-20T10:30:00.000Z",
 };
 
 /**
@@ -145,39 +145,38 @@ export const useLocalStorage = (key, initialValue) => {
 /**
  * EJEMPLO 6: Ciclo de vida del AuthContext
  */
-export const authLifecycle = \`
-1. AL MONTAR EL COMPONENTE (useEffect en AuthContext):
-   - Lee authToken de localStorage
-   - Lee user de localStorage
-   - Si ambos existen, restaura la sesión
-   - setLoading(false)
+export const authLifecycle = `
+1. AL MONTAR EL COMPONENTE (useEffect en AuthContext):   - Lee authToken de localStorage
+  - Lee user de localStorage
+  - Si ambos existen, restaura la sesión
+  - setLoading(false)
 
 2. EN LOGIN (Login.jsx):
-   - Usuario envía formulario
-   - API responde con token y user
-   - Llamar context.login(userData, token)
-   - login() guarda en localStorage
-   - setIsAuthenticated(true)
-   - Redirigir a /dashboard
+  - Usuario envía formulario
+  - API responde con token y user
+  - Llamar context.login(userData, token)
+  - login() guarda en localStorage
+  - setIsAuthenticated(true)
+  - Redirigir a /dashboard
 
 3. EN LOGOUT (Dashboard.jsx):
-   - Usuario hace click en "Cerrar sesión"
-   - Llamar context.logout()
-   - logout() borra localStorage
-   - setIsAuthenticated(false)
-   - Redirigir a /
+  - Usuario hace click en "Cerrar sesión"
+  - Llamar context.logout()
+  - logout() borra localStorage
+  - setIsAuthenticated(false)
+  - Redirigir a /
 
 4. EN RELOAD (F5):
-   - useEffect se ejecuta nuevamente
-   - Lee del localStorage
-   - Restaura sesión automáticamente
-   - Usuario sigue autenticado
-\`;
+  - useEffect se ejecuta nuevamente
+  - Lee del localStorage
+  - Restaura sesión automáticamente
+  - Usuario sigue autenticado
+  `;
 
 /**
  * EJEMPLO 7: Flujo de autenticación completo
  */
-export const fullAuthFlow = \`
+export const fullAuthFlow = `
 // 1. Usuario llega a /login
 <Login />
 
@@ -209,4 +208,4 @@ const { user } = useAuth(); // Obtiene de AuthContext
 // - Lee del localStorage
 // - Restaura la sesión automáticamente
 // - Usuario sigue viendo /dashboard
-\`;
+`;

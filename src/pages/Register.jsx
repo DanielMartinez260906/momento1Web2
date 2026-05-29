@@ -7,15 +7,20 @@ import { cursos } from '../data/courses';
 
 const Register = () => {
   const navigate = useNavigate();
-  const [userType, setUserType] = useState(null); // 'student' o 'teacher'
+  const [userType, setUserType] = useState(null);
   const [formData, setFormData] = useState({
+    cedula: '',
     name: '',
+    apellido: '',
     email: '',
+    telefono: '',
     password: '',
     confirmPassword: '',
     age: '',
     profesionalCard: '',
     subject: '',
+    nomacudiente: '',
+    telacudiente: '',
   });
   const [loading, setLoading] = useState(false);
 
@@ -30,12 +35,11 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validaciones
-    const requiredFields = [formData.name, formData.email, formData.password, formData.confirmPassword, formData.age];
+    const requiredFields = [formData.cedula, formData.name, formData.email, formData.password, formData.confirmPassword, formData.age];
     if (userType === 'teacher') {
       requiredFields.push(formData.profesionalCard, formData.subject);
     }
-    
+
     if (requiredFields.some(field => !field)) {
       Swal.fire({
         icon: 'warning',
@@ -69,8 +73,15 @@ const Register = () => {
     setLoading(true);
 
     try {
-      const { confirmPassword, ...dataToSend } = formData;
-      const response = await fetchPost(ENDPOINTS.AUTH.REGISTER, dataToSend);
+      const { confirmPassword: _, ...rest } = formData;
+      const dataToSend = {
+        ...rest,
+        ideEstudiante: formData.cedula,
+        ideDocente: formData.cedula,
+        role: userType === 'teacher' ? 'TEACHER' : 'STUDENT',
+      };
+
+      await fetchPost(ENDPOINTS.AUTH.REGISTER, dataToSend);
 
       Swal.fire({
         icon: 'success',
@@ -148,6 +159,21 @@ const Register = () => {
           </button>
         </div>
         <form onSubmit={handleSubmit}>
+
+          {/* ── Campo nuevo: Cédula ── */}
+          <div className="form-group">
+            <label htmlFor="cedula">Cédula *</label>
+            <input
+              type="text"
+              id="cedula"
+              name="cedula"
+              value={formData.cedula}
+              onChange={handleChange}
+              placeholder="Número de cédula"
+              disabled={loading}
+            />
+          </div>
+
           <div className="form-group">
             <label htmlFor="name">Nombre Completo</label>
             <input
@@ -160,6 +186,21 @@ const Register = () => {
               disabled={loading}
             />
           </div>
+
+          {/* ── Campo nuevo: Apellido ── */}
+          <div className="form-group">
+            <label htmlFor="apellido">Apellido</label>
+            <input
+              type="text"
+              id="apellido"
+              name="apellido"
+              value={formData.apellido}
+              onChange={handleChange}
+              placeholder="Tu apellido"
+              disabled={loading}
+            />
+          </div>
+
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -172,6 +213,21 @@ const Register = () => {
               disabled={loading}
             />
           </div>
+
+          {/* ── Campo nuevo: Teléfono ── */}
+          <div className="form-group">
+            <label htmlFor="telefono">Teléfono</label>
+            <input
+              type="text"
+              id="telefono"
+              name="telefono"
+              value={formData.telefono}
+              onChange={handleChange}
+              placeholder="Tu teléfono"
+              disabled={loading}
+            />
+          </div>
+
           <div className="form-group">
             <label htmlFor="age">Edad</label>
             <input
@@ -186,6 +242,7 @@ const Register = () => {
               disabled={loading}
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="password">Contraseña</label>
             <input
@@ -198,6 +255,7 @@ const Register = () => {
               disabled={loading}
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="confirmPassword">Confirmar Contraseña</label>
             <input
@@ -210,6 +268,37 @@ const Register = () => {
               disabled={loading}
             />
           </div>
+
+          {/* ── Campos nuevos solo para estudiante ── */}
+          {userType === 'student' && (
+            <>
+              <div className="form-group">
+                <label htmlFor="nomacudiente">Nombre del Acudiente</label>
+                <input
+                  type="text"
+                  id="nomacudiente"
+                  name="nomacudiente"
+                  value={formData.nomacudiente}
+                  onChange={handleChange}
+                  placeholder="Nombre del acudiente"
+                  disabled={loading}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="telacudiente">Teléfono del Acudiente</label>
+                <input
+                  type="text"
+                  id="telacudiente"
+                  name="telacudiente"
+                  value={formData.telacudiente}
+                  onChange={handleChange}
+                  placeholder="Teléfono del acudiente"
+                  disabled={loading}
+                />
+              </div>
+            </>
+          )}
+
           {userType === 'teacher' && (
             <>
               <div className="form-group">
@@ -244,6 +333,7 @@ const Register = () => {
               </div>
             </>
           )}
+
           <button type="submit" disabled={loading} className="btn-primary">
             {loading ? 'Registrando...' : 'Registrarse'}
           </button>
