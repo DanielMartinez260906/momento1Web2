@@ -1,26 +1,56 @@
-// Definición de endpoints centralizados para evitar "magic strings"
-
 export const ENDPOINTS = {
-  // Autenticación
   AUTH: {
-    LOGIN: '/auth/login',
-    REGISTER: '/auth/register',
-    LOGOUT: '/auth/logout',
-    VERIFY: '/auth/verify',
+    LOGIN: "/auth/login",
+    REGISTER: "/auth/register",
   },
-  // Cursos
-  COURSES: {
-    LIST: '/courses',
-    DETAIL: (id) => `/courses/${id}`,
-    CREATE: '/courses',
-    UPDATE: (id) => `/courses/${id}`,
-    DELETE: (id) => `/courses/${id}`,
+  CURSOS: {
+    LIST: "/cursos",
+    DETAIL: (id) => `/cursos/${id}`,
+    CREATE: "/cursos",
+    UPDATE: (id) => `/cursos/${id}`,
+    DELETE: (id) => `/cursos/${id}`,
   },
-  // Usuarios
-  USERS: {
-    PROFILE: '/users/profile',
-    UPDATE_PROFILE: '/users/profile',
-    PREFERENCES: '/users/preferences',
+  DOCENTES: {
+    LIST: "/docentes",
+    DETAIL: (id) => `/docentes/${id}`,
+    CREATE: "/docentes",
+    UPDATE: (id) => `/docentes/${id}`,
+    DELETE: (id) => `/docentes/${id}`,
+  },
+  ESTUDIANTES: {
+    LIST: "/estudiantes",
+    DETAIL: (id) => `/estudiantes/${id}`,
+    CREATE: "/estudiantes",
+    UPDATE: (id) => `/estudiantes/${id}`,
+    DELETE: (id) => `/estudiantes/${id}`,
+  },
+  MATRICULAS: {
+    LIST: "/matriculas",
+    DETAIL: (id) => `/matriculas/${id}`,
+    CREATE: "/matriculas",
+    UPDATE: (id) => `/matriculas/${id}`,
+    DELETE: (id) => `/matriculas/${id}`,
+  },
+  CALIFICACIONES: {
+    LIST: "/calificaciones",
+    DETAIL: (id) => `/calificaciones/${id}`,
+    CREATE: "/calificaciones",
+    UPDATE: (id) => `/calificaciones/${id}`,
+    DELETE: (id) => `/calificaciones/${id}`,
+  },
+  ASIGNATURAS: {
+    LIST: "/asignaturas",
+    DETAIL: (id) => `/asignaturas/${id}`,
+    CREATE: "/asignaturas",
+    UPDATE: (id) => `/asignaturas/${id}`,
+    DELETE: (id) => `/asignaturas/${id}`,
+  },
+  ASIGNACIONES: {
+    LIST: "/asignaciones",
+    DETAIL: (id) => `/asignaciones/${id}`,
+    CREATE: "/asignaciones",
+    UPDATE: (id) => `/asignaciones/${id}`,
+    DELETE: (id) => `/asignaciones/${id}`,
   },
 };
 
